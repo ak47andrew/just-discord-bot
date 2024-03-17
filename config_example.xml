@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <bot>
+        <token></token>
+    </bot>
+    <logger>
+        <terminalFormat><![CDATA[<red>[{level}]</red> | <green>{time:HH:mm:ss} ; {elapsed}</green> | <yellow>{name}:L{line}</yellow> | {message}]]></terminalFormat>
+        <fileFormat><![CDATA[[{level}] | {time:HH:mm:ss} ; {elapsed} | {name}:L{line} | {message}]]></fileFormat>
+        <path>logs/{time:%m.%d}.log</path>
+        <channel></channel>
+        <level>TRACE</level>
+
+        <messages>
+            <onReady>Bot is ready!</onReady>
+        </messages>
+    </logger>
+</config>
