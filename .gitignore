@@ -161,3 +161,4 @@ cython_debug/
 
 config.xml
 test.py
+.vscode/
