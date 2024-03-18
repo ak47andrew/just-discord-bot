@@ -1,16 +1,26 @@
 <?xml version="1.0"?>
 <config>
+    <!-- Configuration of the bot -->
     <bot>
+        <!-- discord bot's token. That you got from https://discord.com/developers/applications -->
         <token></token>
     </bot>
+
+    <!-- Configuration of the loggers -->
     <logger>
+        <!-- Format of logs that will shown in the terminal. Ref: https://loguru.readthedocs.io/en/stable/api/logger.html -->
         <terminalFormat><![CDATA[<red>[{level}]</red> | <green>{time:HH:mm:ss} ; {elapsed}</green> | <yellow>{name}:L{line}</yellow> | {message}]]></terminalFormat>
+        <!-- Format of logs that will saved to the file. Ref: https://loguru.readthedocs.io/en/stable/api/logger.html -->
         <fileFormat><![CDATA[[{level}] | {time:HH:mm:ss} ; {elapsed} | {name}:L{line} | {message}]]></fileFormat>
+        <!-- Path to the logs' file. Ref: https://loguru.readthedocs.io/en/stable/api/logger.html -->
         <path>logs/{time:%m.%d}.log</path>
+        <!-- Channel of the logs -->
         <channel></channel>
+        <!-- Level of logs to show. Ref: https://loguru.readthedocs.io/en/stable/api/logger.html -->
         <level>TRACE</level>
 
         <messages>
+            <!-- Message that will send to logger.channel discord channel when the bot will start -->
             <onReady>Bot is ready!</onReady>
         </messages>
     </logger>

@@ -33,7 +33,7 @@ class JustBot(commands.Bot):
         self.log_channel = log_channel
 
         logger.info(get_var("logger.messages.onReady"))
-        if self.user is None: raise Exception()
+        if self.user is None: raise Exception()  # When bot is not actually ready 
 
         await log_channel.send(embed=Embed(
             title=get_var("logger.messages.onReady"),
@@ -53,4 +53,4 @@ class JustBot(commands.Bot):
 
     def run(self) -> None:  # type: ignore
         logger.trace("Connecting to discord servers...")
-        return super().run(self.token)
+        super().run(self.token)
