@@ -1,3 +1,2 @@
-import peewee as pw
-
-db = pw.SqliteDatabase("src/database/sqlitedb.db")
+from src.database import api
+from src.database import models
