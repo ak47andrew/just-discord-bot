@@ -1,11 +1,12 @@
 from datetime import datetime
 from typing import Any
-from discord import Colour, Embed, EmbedAuthor, TextChannel
+from discord import Colour, Embed, EmbedAuthor, Intents, TextChannel
 from discord.ext import commands
 from loguru import logger
 from src.config import get_var
 from src.cogs import cogs
 import traceback
+from src.classes.helper import format_formatted_exc
 
 
 class JustBot(commands.Bot):
@@ -13,17 +14,18 @@ class JustBot(commands.Bot):
     log_channel: TextChannel
 
     def __init__(self, token: str):
-        super().__init__(command_prefix="None")  # type: ignore
+        super().__init__(command_prefix="None", intents=Intents.all())  # type: ignore
         self.token = token
+        self.remove_command("help")
         logger.trace("Initilised bot")
 
         logger.trace("Start loading cogs")
         for cog in cogs:
             try:
-                self.add_cog(cog)
-                logger.trace(f"Loaded cog {cog.qualified_name} sucsessfuly")
+                self.add_cog(cog(self))
+                logger.trace(f"Loaded cog \"{cog.__name__}\" sucsessfuly")
             except Exception as e:
-                logger.error(f"Error happend while loading {cog.qualified_name}\n{traceback.format_exception(e)[:-1]}")
+                logger.error(f"Error happend while loading \"{cog.__name__}\"\n{format_formatted_exc(traceback.format_exception(e))}")
         logger.trace(f"Sucsesfully loaded {len(cogs)} cogs")
 
     async def on_ready(self):
@@ -46,7 +48,7 @@ class JustBot(commands.Bot):
         ))
 
     async def on_command_error(self, context: commands.Context, exception: commands.CommandError) -> None:  # type: ignore
-        logger.error(f"Error happend while executing {context.command.name}\n{traceback.format_exception(exception)[:-1]}")  # type: ignore
+        logger.error(f"Error happend while executing {context.command.name}\n{format_formatted_exc(traceback.format_exception(exception))}")  # type: ignore
 
     async def on_error(self, event_method: str, *args: Any, **kwargs: Any) -> None:
         logger.error(f"Error in the function {event_method} | args={args} | kwargs={kwargs}\n{traceback.format_exc()[:-1]}")
