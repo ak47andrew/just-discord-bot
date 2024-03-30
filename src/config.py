@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 
 elementTree = ET.parse("config.xml")
 
+
 def get_var(path: str) -> str:
     """Find and return the text value of an element in the XML tree.
 
@@ -23,5 +24,6 @@ def get_var(path: str) -> str:
         raise ValueError(f"Path {path} don't contain any value!"
                          "Use config.elementTree.find() to get other attributes.")
     return text
+
 
 __all__ = ("get_var",)

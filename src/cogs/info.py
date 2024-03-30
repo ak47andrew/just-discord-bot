@@ -12,16 +12,16 @@ class Info(commands.Cog):
     @discord.commands.slash_command()
     async def help(self, ctx: discord.ApplicationContext):
         categories: dict[str, list[discord.ApplicationCommand]] = DefaultDict(lambda: list())
-        for commmand in self.bot.application_commands:
-            categories[commmand.cog.name if commands.cog is not None else "No category"].append(commmand)
+        for command in self.bot.application_commands:
+            categories[command.cog.name if commands.cog is not None else "No category"].append(command)
 
         def format_command(command: discord.ApplicationCommand) -> str:
             return f"`{command.name}` - *{api.get_command_description(command.name)}*\n"
 
-        def format_category(name: str, comms: list[discord.ApplicationCommand]) -> str:
+        def format_category(name: str, commands: list[discord.ApplicationCommand]) -> str:
             out = f"**{name}:**\n"
 
-            for command in comms:
+            for command in commands:
                 out += format_command(command)
 
             return out
