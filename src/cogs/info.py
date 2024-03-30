@@ -31,3 +31,7 @@ class Info(commands.Cog):
             color=discord.Color.random(seed=self.bot.application_id),
             description="\n".join([format_category(*category) for category in categories.items()])
         ))
+
+    @discord.commands.slash_command()
+    async def configure(self, ctx: discord.ApplicationContext):
+        pass
